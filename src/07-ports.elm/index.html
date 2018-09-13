@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="elm.js"></script>
+    </head>
+    <body>
+    </body>
+    <script type="text/javascript">
+     function convert(myobject){
+         return {
+           name: myobject.name + "-san",
+           age: myobject.age + 1,
+           height: myobject.height + 1.5,
+           married: ! myobject.married
+         }
+     }
+
+     var app = Elm.PortsTest.fullscreen();
+        app.ports.elm2js.subscribe(function(myobject) {
+         console.log("myobject="+JSON.stringify(myobject));
+         var newobject = convert(myobject);
+         console.log("newobject="+JSON.stringify(newobject));
+         app.ports.js2elm.send(newobject);
+     });
+    </script>
+</html>
