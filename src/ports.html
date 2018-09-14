@@ -5,23 +5,26 @@
         <script type="text/javascript" src="elm.js"></script>
     </head>
     <body>
+        <div id="elm"></div>
     </body>
     <script type="text/javascript">
-     function convert(myobject){
-         return {
-           name: myobject.name + "-san",
-           age: myobject.age + 1,
-           height: myobject.height + 1.5,
-           married: ! myobject.married
-         }
-     }
+        function convert(myobject){
+            return {
+                name: myobject.name + "-san",
+                age: myobject.age + 1,
+                height: myobject.height + 1.5,
+                married: ! myobject.married
+            }
+        }
 
-     var app = Elm.PortsTest.fullscreen();
+        var app = Elm.PortSample.init({
+            node: document.getElementById('elm')
+        });
         app.ports.elm2js.subscribe(function(myobject) {
-         console.log("myobject="+JSON.stringify(myobject));
-         var newobject = convert(myobject);
-         console.log("newobject="+JSON.stringify(newobject));
-         app.ports.js2elm.send(newobject);
-     });
+            console.log("myobject="+JSON.stringify(myobject));
+            var newobject = convert(myobject);
+            console.log("newobject="+JSON.stringify(newobject));
+            app.ports.js2elm.send(newobject);
+        });
     </script>
 </html>

@@ -57,19 +57,19 @@ update msg model =
 getInt : String -> Int
 getInt str =
   case String.toInt(str) of
-    Ok i -> i
-    _    -> 0
+    Just i  -> i
+    Nothing -> 0
 
 
 getFloat : String -> Float
 getFloat str =
   case String.toFloat(str) of
-    Ok f -> f
-    _    -> 0.0
+    Just f  -> f
+    Nothing -> 0.0
 
 
 -- OUTGOING PORT
-port elm2js : Model -> (Cmd Msg)
+port elm2js : Model -> Cmd msg
 
 
 -- IMCOMING PORT
@@ -93,9 +93,9 @@ view model =
     , div []
         [ text model.name
         , text " - "
-        , text <| (String.fromInt model.age)
+        , text <| (Debug.toString model.age)
         , text " - "
-        , text <| (String.fromInt model.heigth)
+        , text <| (Debug.toString model.height)
         , text " - "
         , text <| (Debug.toString model.married)
         ]
